@@ -1,3 +1,3 @@
-# dribbble-php-client
+# php-github-client
 
-php-stack-api is a php SDK for dribbble api. Now you can easily access and hanlde all of dribbble Apis. Lets enjoy :)
+php-github-client is a php SDK for github api. Now you can easily access and hanlde all of github Apis. Lets enjoy :)
