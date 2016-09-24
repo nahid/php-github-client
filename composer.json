@@ -1,8 +1,8 @@
 {
-    "name": "nahid/dribbble-php-client",
-    "description": "You can access and manage dribbble api with this package",
+    "name": "nahid/github-php-client",
+    "description": "You can access and manage github api with this package",
     "type": "library",
-    "keywords": ["php-dribbble-api", "php-dribbble", "dribbble-php", "dribbble-php-client"],
+    "keywords": ["php-github-api", "php-github", "github-php", "github-php-client"],
     "require-dev": {
         "phpunit/phpunit": "^5.4"
     },
