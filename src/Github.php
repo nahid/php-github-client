@@ -33,7 +33,10 @@ class Github
 
     public function __get($key)
     {
-        return $this->data->$key;
+        if(isset($this->data->$key)){
+            return $this->data->$key;
+        }
+
     }
 
 
@@ -41,8 +44,7 @@ class Github
     {
         $state = !is_null($state)?md5($state):'';
         $this->session->set('state', $state);
-        return 'https://github.com/login/oauth/authorize
-?client_id='.$this->config->get('client_id').'&redirect_uri='.$this->config->get('redirect_uri').'&scope='. rawurlencode($scope).'&state='. $state;
+        return 'https://github.com/login/oauth/authorize?client_id='.$this->config->get('client_id').'&redirect_uri='.$this->config->get('redirect_uri').'&scope='. rawurlencode($scope).'&state='. $state;
     }
 
     public function getAccessToken()
@@ -129,22 +131,26 @@ class Github
     public function totalStargazers()
     {
         $totalStars = 0;
+        $url = 'https://api.github.com/users/' . $this->login;
         $repos = $this->repos()->get(['page'=>1, 'per_page'=>$this->public_repos]);
         foreach ($repos->data() as $repo) {
             $totalStars += $repo->stargazers_count;
         }
 
+        $this->url = $url;
         return $totalStars;
     }
 
      public function totalForks()
     {
         $totalForks = 0;
+        $url = 'https://api.github.com/users/' . $this->login;
         $repos = $this->repos()->get(['page'=>1, 'per_page'=>$this->public_repos]);
         foreach ($repos->data() as $repo) {
             $totalForks += $repo->forks_count;
         }
 
+        $this->url = $url;
         return $totalForks;
     }
 
@@ -188,6 +194,13 @@ class Github
         }
 
         return false;
+    }
+
+    public function destroyAccessToken()
+    {
+        $this->session->set('accessToken', null);
+        $this->session->set('expires', time()-3600);
+        return true;
     }
 
     public static function fromCamelCase($str, $glue = '-')

@@ -50,7 +50,7 @@ class GithubServiceProvider extends ServiceProvider
     protected function registerGithub()
     {
         $this->app->singleton('Github', function (Container $app) {
-            return new StackApi($app['config']->get('github'));
+            return new \Nahid\GithubClient\Github($app['config']->get('github'));
         });
     }
     /**

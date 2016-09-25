@@ -1,5 +1,5 @@
 <?php
-namespace Nahid\StackApis\Facades;
+namespace Nahid\GithubClient\Facades;
 use Illuminate\Support\Facades\Facade;
 class Github extends Facade
 {
